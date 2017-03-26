@@ -1,7 +1,10 @@
 " vim: set sw=2 fdm=marker nowrap et:
 "
 " skk.vim
-"
+"      mark y
+"      mark u
+"        \. ":：\<NL>"
+"        \. ";；\<NL>"
 " Author: Noriaki Yagi <no_yag@yahoo.co.jp>
 " Version: $Id: skk.vim,v 0.22 2006/10/11 09:26:53 noriaki Exp noriaki $
 " Last Change: 2012-10-05.
@@ -68,7 +71,7 @@ if !exists("skk_external_prog")
 endif
 
 if !exists("skk_control_j_key")
-  let skk_control_j_key = "<C-j>"
+  let skk_control_j_key = "<C-f>"
 endif
 
 if !exists("skk_abbrev_to_zenei_key")
@@ -1177,22 +1180,22 @@ if !exists("skk_rom_kana_rules")
           \. "wi	うぃ	ウィ\<NL>"
           \. "wo	を	ヲ\<NL>"
           \. "wu	う	ウ\<NL>"
-          \. "xx	っ	ッ	x\<NL>"
-          \. "xa	ぁ	ァ\<NL>"
-          \. "xe	ぇ	ェ\<NL>"
-          \. "xi	ぃ	ィ\<NL>"
-          \. "xka	か	ヵ\<NL>"
-          \. "xke	け	ヶ\<NL>"
-          \. "xo	ぉ	ォ\<NL>"
-          \. "xtsu	っ	ッ\<NL>"
-          \. "xtu	っ	ッ\<NL>"
-          \. "xu	ぅ	ゥ\<NL>"
-          \. "xwa	ゎ	ヮ\<NL>"
-          \. "xwe	ゑ	ヱ\<NL>"
-          \. "xwi	ゐ	ヰ\<NL>"
-          \. "xya	ゃ	ャ\<NL>"
-          \. "xyo	ょ	ョ\<NL>"
-          \. "xyu	ゅ	ュ\<NL>"
+          \. "lx	っ	ッ	x\<NL>"
+          \. "la	ぁ	ァ\<NL>"
+          \. "le	ぇ	ェ\<NL>"
+          \. "li	ぃ	ィ\<NL>"
+          \. "lka	か	ヵ\<NL>"
+          \. "lke	け	ヶ\<NL>"
+          \. "lo	ぉ	ォ\<NL>"
+          \. "ltsu	っ	ッ\<NL>"
+          \. "ltu	っ	ッ\<NL>"
+          \. "lu	ぅ	ゥ\<NL>"
+          \. "lwa	ゎ	ヮ\<NL>"
+          \. "lwe	ゑ	ヱ\<NL>"
+          \. "lwi	ゐ	ヰ\<NL>"
+          \. "lya	ゃ	ャ\<NL>"
+          \. "lyo	ょ	ョ\<NL>"
+          \. "lyu	ゅ	ュ\<NL>"
           \. "yy	っ	ッ	y\<NL>"
           \. "ya	や	ヤ\<NL>"
           \. "ye	いぇ	イェ\<NL>"
@@ -1202,7 +1205,7 @@ if !exists("skk_rom_kana_rules")
           \. "z,	‥\<NL>"
           \. "z-	～\<NL>"
           \. "z.	…\<NL>"
-          \. "z/	・\<NL>"
+          \. "zm	・\<NL>"
           \. "z[	『\<NL>"
           \. "z]	』\<NL>"
           \. "za	ざ	ザ\<NL>"
@@ -1220,8 +1223,6 @@ if !exists("skk_rom_kana_rules")
           \. "zyo	じょ	ジョ\<NL>"
           \. "zyu	じゅ	ジュ\<NL>"
           \. "-	ー\<NL>"
-          \. ":	：\<NL>"
-          \. ";	；\<NL>"
           \. "!	！\<NL>"
           \. "?	？\<NL>"
           \. "[	「\<NL>"
@@ -1243,8 +1244,8 @@ if !exists("skk_rom_func_rules")
     let skk_rom_func_rules = ""
           \. ".	SkkCurrentKuten(kana)\<NL>"
           \. ",	SkkCurrentTouten(kana)\<NL>"
-          \. "l	SkkAsciiMode(kana)\<NL>"
-          \. "L	SkkZeneiMode(kana)\<NL>"
+          \. "x	SkkAsciiMode(kana)\<NL>"
+          \. "X	SkkZeneiMode(kana)\<NL>"
           \. "q	SkkToggleKana(kana)\<NL>"
           \. "Q	SkkSetHenkanPoint1(kana)\<NL>"
           \. "/	SkkAbbrevMode(kana)\<NL>"
@@ -1279,8 +1280,6 @@ if !exists("skk_zenei_rules")
         \. "7７\<NL>"
         \. "8８\<NL>"
         \. "9９\<NL>"
-        \. ":：\<NL>"
-        \. ";；\<NL>"
         \. "<＜\<NL>"
         \. "=＝\<NL>"
         \. ">＞\<NL>"
@@ -2320,17 +2319,15 @@ function! SkkMap(silent)
   exe mapstr . '<Tab>	<C-r>=<SID>SkkKey("<C-v><Tab>")<CR>'
   exe mapstr . '<CR>	<C-r>=<SID>SkkKey("<C-v><CR>")<CR><CR>'
   exe mapstr . '<C-j>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
+  exe mapstr . '<C-f>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
   exe mapstr . '<C-g>	<C-r>=<SID>SkkKey("<C-v><C-g>")<CR>'
   exe mapstr . '<BS>	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
+  exe mapstr . ';	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
   exe mapstr . '<C-h>	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
   exe mapstr . '<Home>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><Home>'
   exe mapstr . '<End>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><End>'
   exe mapstr . '<Left>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><Left>'
   exe mapstr . '<Right>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><Right>'
-  exe mapstr . '<C-a>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><Home>'
-  exe mapstr . '<C-e>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><End>'
-  exe mapstr . '<C-b>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><Left>'
-  exe mapstr . '<C-f>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><Right>'
   exe mapstr . '<C-w>	<C-r>=<SID>SkkKey("<C-v><C-u>")<CR><C-w>'
   exe mapstr . '<C-u>	<C-r>=<SID>SkkKey("<C-v><C-u>")<CR><C-u>'
   if mode() !=# 'c'
@@ -2414,10 +2411,16 @@ function! s:SkkKey(key)
     endif
     let &backspace = s:bs_save
     let &l:formatoptions = b:skk_fo_save
+  elseif a:key == "\<C-f>"
+    let str = s:SkkControlJ()
   elseif a:key == "\<C-j>"
+    let str = s:SkkControlJ()
+  elseif a:key == "xx"
     let str = s:SkkControlJ()
   elseif a:key == "\<C-g>"
     let str = s:SkkCancel()
+  elseif a:key == ";"
+    let str = s:SkkBackspace()
   elseif a:key == "\<C-h>"
     let str = s:SkkBackspace()
     if s:skk_in_cmdline && !g:skk_keep_state && getcmdpos() == 1 && strlen(getcmdline()) == 0
