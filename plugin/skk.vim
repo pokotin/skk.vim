@@ -71,7 +71,7 @@ if !exists("skk_external_prog")
 endif
 
 if !exists("skk_control_j_key")
-  let skk_control_j_key = "<C-f>"
+  let skk_control_j_key = "<C-j>"
 endif
 
 if !exists("skk_abbrev_to_zenei_key")
@@ -2318,11 +2318,12 @@ function! SkkMap(silent)
   endwhile
   exe mapstr . '<Tab>	<C-r>=<SID>SkkKey("<C-v><Tab>")<CR>'
   exe mapstr . '<CR>	<C-r>=<SID>SkkKey("<C-v><CR>")<CR><CR>'
-  exe mapstr . '<C-j>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
-  exe mapstr . '<C-f>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
+  " exe mapstr . '<C-j>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
+  " exe mapstr . '<C-f>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
+  " exe mapstr . 'jk	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
   exe mapstr . '<C-g>	<C-r>=<SID>SkkKey("<C-v><C-g>")<CR>'
   exe mapstr . '<BS>	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
-  exe mapstr . ';	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
+  exe mapstr . ';		<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
   exe mapstr . '<C-h>	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
   exe mapstr . '<Home>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><Home>'
   exe mapstr . '<End>	<C-r>=<SID>SkkKey("<C-v><C-a>")<CR><End>'
@@ -2413,8 +2414,6 @@ function! s:SkkKey(key)
     let &l:formatoptions = b:skk_fo_save
   elseif a:key == "\<C-f>"
     let str = s:SkkControlJ()
-  elseif a:key == "\<C-j>"
-    let str = s:SkkControlJ()
   elseif a:key == "xx"
     let str = s:SkkControlJ()
   elseif a:key == "\<C-g>"
@@ -2469,6 +2468,8 @@ function! s:SkkInsert(char)
       if b:skk_henkan_mode != 0 && a:char == g:skk_kakutei_key
         call s:SkkKakutei()
         return ''
+      elseif b:skk_abbrev_mode_on == 1 && a:char == g:skk_sticky_key
+        return 'c'
       elseif b:skk_henkan_mode == 3
         return SkkHenkan(a:char)
       elseif b:skk_henkan_mode == 0 && a:char == g:skk_sticky_key
