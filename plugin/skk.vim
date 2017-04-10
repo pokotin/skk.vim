@@ -1170,6 +1170,8 @@ if !exists("skk_rom_kana_rules")
           \. "wi	うぃ	ウィ\<NL>"
           \. "wo	を	ヲ\<NL>"
           \. "wu	う	ウ\<NL>"
+          \. "ld	！\<NL>"
+          \. "lf	？\<NL>"
           \. "lx	っ	ッ	x\<NL>"
           \. "la	ぁ	ァ\<NL>"
           \. "le	ぇ	ェ\<NL>"
