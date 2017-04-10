@@ -2318,9 +2318,9 @@ function! SkkMap(silent)
   endwhile
   exe mapstr . '<Tab>	<C-r>=<SID>SkkKey("<C-v><Tab>")<CR>'
   exe mapstr . '<CR>	<C-r>=<SID>SkkKey("<C-v><CR>")<CR><CR>'
+  exe mapstr . '<c-m>	<C-r>=<SID>SkkKey("<C-v><CR>")<CR><CR>'
   " exe mapstr . '<C-j>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
   " exe mapstr . '<C-f>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
-  " exe mapstr . 'jk	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
   exe mapstr . '<C-g>	<C-r>=<SID>SkkKey("<C-v><C-g>")<CR>'
   exe mapstr . '<BS>	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
   exe mapstr . ';		<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
@@ -2334,6 +2334,7 @@ function! SkkMap(silent)
   if mode() !=# 'c'
     exe mapstr . '<Esc>	<C-r>=<SID>SkkKey("<C-v><Esc>")<CR><Esc>'
     exe mapstr . '<C-c>	<C-r>=<SID>SkkKey("<C-v><Esc>")<CR><C-c>'
+    exe mapstr . 'jk	<C-r>=<SID>SkkKey("<C-v><Esc>")<CR><Esc>'
   endif
   exe mapstr . g:skk_abbrev_to_zenei_key . " <C-r>=<SID>SkkKey(\"<C-v><C-q>\")<CR>"
   if exists("g:format_command") && g:skk_autofill_toggle_key != ""
@@ -2461,6 +2462,11 @@ endfunction
 function! s:SkkInsert(char)
   if b:skk_mode == 'ascii'
     return a:char
+  elseif b:skk_abbrev_mode_on == 1 && a:char == g:skk_sticky_key
+    return SkkStartHenkan()
+    " return a:char
+  elseif b:skk_abbrev_mode_on == 1 && a:char == g:skk_start_henkan_key
+    return a:char
   elseif b:skk_mode == 'zenei'
     return s:SkkInsertZenei(a:char)
   else		" hira|kata
@@ -2468,8 +2474,6 @@ function! s:SkkInsert(char)
       if b:skk_henkan_mode != 0 && a:char == g:skk_kakutei_key
         call s:SkkKakutei()
         return ''
-      elseif b:skk_abbrev_mode_on == 1 && a:char == g:skk_sticky_key
-        return 'c'
       elseif b:skk_henkan_mode == 3
         return SkkHenkan(a:char)
       elseif b:skk_henkan_mode == 0 && a:char == g:skk_sticky_key
