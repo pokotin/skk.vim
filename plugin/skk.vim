@@ -1,10 +1,6 @@
 " vim: set sw=2 fdm=marker nowrap et:
 "
 " skk.vim
-"      mark y
-"      mark u
-"        \. ":：\<NL>"
-"        \. ";；\<NL>"
 " Author: Noriaki Yagi <no_yag@yahoo.co.jp>
 " Version: $Id: skk.vim,v 0.22 2006/10/11 09:26:53 noriaki Exp noriaki $
 " Last Change: 2012-10-05.
@@ -1221,6 +1217,8 @@ if !exists("skk_rom_kana_rules")
           \. "?	？\<NL>"
           \. "[	「\<NL>"
           \. "]	」\<NL>"
+          \. "l:	：\<NL>"
+          \. "z:	；\<NL>"
           \. "z0	⓪\<NL>"
           \. "z1	①\<NL>"
           \. "z2	②\<NL>"
