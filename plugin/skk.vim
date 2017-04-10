@@ -2352,9 +2352,8 @@ function! SkkMap(silent)
   endwhile
   exe mapstr . '<Tab>	<C-r>=<SID>SkkKey("<C-v><Tab>")<CR>'
   exe mapstr . '<CR>	<C-r>=<SID>SkkKey("<C-v><CR>")<CR><CR>'
-  exe mapstr . '<c-m>	<C-r>=<SID>SkkKey("<C-v><CR>")<CR><CR>'
   " exe mapstr . '<C-j>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
-  " exe mapstr . '<C-f>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
+  exe mapstr . '<C-f>	<C-r>=<SID>SkkKey("<C-v><C-j>")<CR>'
   exe mapstr . '<C-g>	<C-r>=<SID>SkkKey("<C-v><C-g>")<CR>'
   exe mapstr . '<BS>	<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
   exe mapstr . ';		<C-r>=<SID>SkkKey("<C-v><C-h>")<CR>'
@@ -2498,9 +2497,11 @@ function! s:SkkInsert(char)
     return a:char
   elseif b:skk_abbrev_mode_on == 1 && a:char == g:skk_sticky_key
     return SkkStartHenkan()
-    " return a:char
   elseif b:skk_abbrev_mode_on == 1 && a:char == g:skk_start_henkan_key
     return a:char
+  elseif b:skk_abbrev_mode_on == 1 && a:char == '/'
+    call s:SkkKakutei()
+    return ''
   elseif b:skk_mode == 'zenei'
     return s:SkkInsertZenei(a:char)
   else		" hira|kata
