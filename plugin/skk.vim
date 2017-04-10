@@ -1202,6 +1202,7 @@ if !exists("skk_rom_kana_rules")
           \. "yo	よ	ヨ\<NL>"
           \. "yu	ゆ	ユ\<NL>"
           \. "zz	っ	ッ	z\<NL>"
+          \. "ll	！\<NL>"
           \. "z,	‥\<NL>"
           \. "z-	～\<NL>"
           \. "z.	…\<NL>"
